@@ -5,12 +5,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Crypto from "../components/Crypto";
 
-export default function WelcomeSreen() {
+export default function WelcomeSreen({ navigation }) {
   const [arrayCryptos, setArrayCryptos] = useState([]);
   const users = useSelector((state) => state.user.value);
 
   const listingCrypto = arrayCryptos.map((crypto, index) => {
-    return <Crypto key={index} crypto={crypto} />;
+    return <Crypto key={index} crypto={crypto} navigation={navigation} />;
   });
 
   useEffect(() => {
@@ -24,7 +24,9 @@ export default function WelcomeSreen() {
   }, []);
   return (
     <View style={styles.container}>
-      <Text>Welcome {users.username} !</Text>
+      <Text style={{ fontSize: 18, fontWeight: "bold", paddingBottom: 10 }}>
+        Welcome {users.username} !
+      </Text>
       <View
         style={{
           width: "100%",

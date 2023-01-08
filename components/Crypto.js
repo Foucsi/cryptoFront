@@ -3,8 +3,12 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function Crypto({ crypto }) {
+export default function Crypto({ crypto, navigation }) {
   const [price, setPrice] = useState(false);
+
+  const handleSubmit = (name, price) => {
+    navigation.navigate("Crypto", { name: name, price: price });
+  };
 
   useEffect(() => {
     if (crypto.current_price > crypto.low_24h) {
@@ -25,6 +29,7 @@ export default function Crypto({ crypto }) {
       }}
     >
       <TouchableOpacity
+        onPress={() => handleSubmit(crypto.name, crypto.current_price)}
         style={{
           height: "100%",
           width: "100%",
