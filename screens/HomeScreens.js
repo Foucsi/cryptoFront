@@ -23,6 +23,7 @@ export default function HomeScreens({ navigation }) {
           }}
         >
           <TouchableOpacity
+            onPress={() => navigation.navigate("Signin")}
             style={{
               width: "50%",
               height: "10%",

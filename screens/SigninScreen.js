@@ -14,16 +14,14 @@ import { useDispatch } from "react-redux";
 export default function SignupScreen({ navigation }) {
   const dispatch = useDispatch();
   const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleRegister = () => {
-    fetch(`http://${fetchIp.myIp}:3000/users/signup`, {
+    fetch(`http://${fetchIp.myIp}:3000/users/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
-        email: email,
         password: password,
       }),
     })
@@ -34,14 +32,12 @@ export default function SignupScreen({ navigation }) {
           dispatch(
             login({
               username: data.user.username,
-              email: data.user.email,
               password: data.user.password,
               token: data.user.token,
             })
           );
           navigation.navigate("Welcome");
           setUsername("");
-          setEmail("");
           setPassword("");
         }
       });
@@ -49,7 +45,7 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={{ paddingBottom: 10 }}>Create a new account !</Text>
+      <Text style={{ paddingBottom: 10 }}>Signin</Text>
       <View style={styles.containerInput}>
         <TextInput
           placeholder="Username"
@@ -57,13 +53,6 @@ export default function SignupScreen({ navigation }) {
           autoCapitalize={false}
           value={username}
           onChangeText={(value) => setUsername(value)}
-        />
-        <TextInput
-          placeholder="Email"
-          style={styles.input}
-          autoCapitalize={false}
-          value={email}
-          onChangeText={(value) => setEmail(value)}
         />
         <TextInput
           secureTextEntry={true}
@@ -86,7 +75,7 @@ export default function SignupScreen({ navigation }) {
           alignItems: "center",
         }}
       >
-        <Text style={{ fontWeight: "bold", fontSize: 18 }}>Register</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>Connection</Text>
       </TouchableOpacity>
     </View>
   );
