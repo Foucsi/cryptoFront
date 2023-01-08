@@ -16,6 +16,7 @@ export default function SignupScreen({ navigation }) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [msg, setMsg] = useState("");
 
   const handleRegister = () => {
     fetch(`http://${fetchIp.myIp}:3000/users/signup`, {
@@ -43,6 +44,20 @@ export default function SignupScreen({ navigation }) {
           setUsername("");
           setEmail("");
           setPassword("");
+        } else if (data.error === "Missing or empty fields") {
+          setMsg("Missing or empty fields");
+        } else if (data.error === "User already exists") {
+          setMsg(
+            <View>
+              <Text>User already exists</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
+                <Text style={{ textDecorationLine: "underline" }}>Signin</Text>
+              </TouchableOpacity>
+            </View>
+          );
+          setEmail("");
+          setPassword("");
+          setUsername("");
         }
       });
   };
@@ -73,6 +88,9 @@ export default function SignupScreen({ navigation }) {
           value={password}
           onChangeText={(value) => setPassword(value)}
         />
+      </View>
+      <View style={{ paddingTop: 20 }}>
+        <Text>{msg}</Text>
       </View>
       <TouchableOpacity
         onPress={() => handleRegister()}
