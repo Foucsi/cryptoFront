@@ -24,6 +24,7 @@ export default function WelcomeSreen() {
   }, []);
   return (
     <View style={styles.container}>
+      <Text>Welcome {users.username} !</Text>
       <View
         style={{
           width: "100%",

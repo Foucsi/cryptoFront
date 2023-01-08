@@ -16,11 +16,12 @@ export default function Crypto({ crypto }) {
     <View
       style={{
         height: 150,
-        width: 150,
+        width: 170,
         marginTop: 10,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: price ? "#6DB76B" : "#E5595F",
+        borderRadius: 5,
       }}
     >
       <TouchableOpacity
